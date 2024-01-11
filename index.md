@@ -45,21 +45,23 @@ Hello, World! This is the home of my lab reports for CSE 15L.
   - The command printed the path to the file. It did not print the contents of the file, or any information about the file.
   - The output is not an error.
   
-  # CAT
-  <br>
-  No Arguments:
-  -
-  -
-  -
-  -
-  Path to Directory:
-  -
-  -
-  -
-  -
-  Path to File:
-  -
-  -
-  -
-  -
+  # `cat`
+### No Arguments:
+  - <img width="168" alt="Screenshot 2024-01-11 131449" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/966dfc0a-2454-4b4e-a62a-0f04ab80826b">
+
+  - Working directory at runtime: `/home`
+  - The command tries to read from the stream `stdin`, which in this case points to the terminal. All characters typed are echoed when a newline is given, as I'm guessing the internal representation when reading this is using some form of readLine().
+  - The output is not an error.
+### Path to Directory:
+  - ![image](https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/0b55fed0-7d8e-492a-ada9-a59f80069866)
+
+  - Working directory at runtime: `/home`
+  - The command failed to read the contents of the given file descriptor, as it pointed to a directory and was invalid. This would be an application of `ls`, which would internally use `fopendir` rather than `fopen`, which would properly read a directory.
+  - The output is an error, as it did not output any contents and simply said that it was a directory (which is invalid input for `cat`.
+### Path to File:
+  - <img width="455" alt="Screenshot 2024-01-11 131518" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/7fb7c1bf-026a-4819-8e29-735c4acd1bc2">
+
+  - Working directory at runtime: `/home`
+  - The command output the contents of the file. Notably, without the trailing newline flag, the shell prefix showed up on the same line as the last bracket!
+  - The output is not an error.
 </details>
