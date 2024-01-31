@@ -7,11 +7,11 @@ Hello, World! This is the home of my lab reports for CSE 15L.
 
 ### No Arguments:
 
-- <img width="447" alt="Screenshot 2024-01-11 130559" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/f8eff158-274a-4b4f-98c9-f7b4fc86b953">
+- <img width="158" alt="Screenshot 2024-01-30 162800" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/762d78e4-1a4e-454d-b6ed-6e7274eb7ca4">
 
-- Working directory at runtime: `/home` (ended at `/home`)
+- Working directory at runtime: `/mnt/` (ended at `/home`)
   
-- The command was not given any arguments, and therefore made no changes and simply returned without output.
+- Given no arguments, the command returned to the present user's pwd: `/home`, in this case
   
 - The output is not an error.
   
