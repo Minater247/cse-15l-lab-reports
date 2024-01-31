@@ -11,7 +11,7 @@ Hello, World! This is the home of my lab reports for CSE 15L.
 
 - Working directory at runtime: `/mnt/` (ended at `/home`)
   
-- Given no arguments, the command returned to the present user's home directory: `/home`, in this case.
+- Given no arguments, the command returned to the present the working directory to the user's home directory: `/home`, in this case.
   
 - The output is not an error.
   
