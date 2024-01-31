@@ -102,3 +102,18 @@ class ChatServer {
 <br>
 │   │   │   ├── The `state` variable, containing the message state, is incremented in the format `user: message` by taking the second item of `first` (`first[1]` as the message and the second item of `second` (`second[1]`) as the username. The final added string is `mrbean22: Welcome @minater247!\n`
 <br>
+
+
+## Part 2: Secure Shell Keys, SCP and MKDIR
+- Path to Local Public Key
+<img width="476" alt="Screenshot 2024-01-30 180605" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/e32d1eba-ade8-47e7-a079-77d2769607f2">
+
+- Path to Remote Private Key
+<img width="618" alt="Screenshot 2024-01-30 180435" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/0a61ebf0-db77-4356-bc22-2b0d4e3ceaea">
+
+- Login Without Password
+<img width="857" alt="Screenshot 2024-01-30 175934" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/bcb9e574-a02a-4787-81ab-95acca9109a3">
+
+## Part 3: What I Learned
+
+Something new I learned this lab was the command `scp`! Although I have programmed frequently using many languages in the past years, I have always worked on my local computer, rarely using ssh or ftp server connections. This command essentially combines the two, allowing direct copying between local/remote and remote/remote locations!
