@@ -51,3 +51,53 @@ class ChatServer {
     }
 }
 ```
+### Screenshots and Tracebacks
+<img width="948" alt="Screenshot 2024-01-25 133823" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/1f255aa3-5c3a-4e00-96a1-cf42ce398c64">
+
+<hr>
+
+`handleRequest("https://0-0-0-0-4000-613464ujop807gmt5kq4uklcn0.us.edusercontent.com/add-message?s=Now talking in channel main.&user=System")`
+
+├── `url.getPath().equals("/")` is false
+<br>
+├── `url.getPath().equals("/add-message")` is true
+<br>
+│   ├── `url.getQuery().split("&")` separates the query into message and user
+<br>
+│   ├── `try/catch` block for error handling
+<br>
+│   │   ├── `String user` and `String message` are initialized
+<br>
+│   │   ├── The portion of the query before the first '&' is split at the '=' into another array, `first`
+<br>
+│   │   ├── The portion of the query after the first '&' and before the second '&' is split at the '=' into another array, `second`
+<br>
+│   │   ├── `first[0].equals("s")` is true and `second[0].equals("user")` are true, meaning the message comes before the user in this input
+<br>
+│   │   ├── The `state` variable, containing the message state, is incremented in the format `user: message` by taking the second item of `first` as the message and the second item of `user` as the username.
+<br>
+
+<img width="845" alt="Screenshot 2024-01-25 133832" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/e4f5a855-6d8b-4363-9810-84558c12ef87">
+
+<hr>
+
+`handleRequest("https://0-0-0-0-4000-613464ujop807gmt5kq4uklcn0.us.edusercontent.com/add-message?s=Welcome @minater247!&user=mrbean22")`
+
+├── `url.getPath().equals("/")` is false
+<br>
+├── `url.getPath().equals("/add-message")` is true
+<br>
+│   ├── `url.getQuery().split("&")` separates the query into message and user
+<br>
+│   ├── `try/catch` block for error handling
+<br>
+│   │   ├── `String user` and `String message` are initialized
+<br>
+│   │   ├── The portion of the query before the first '&' is split at the '=' into another array, `first`
+<br>
+│   │   ├── The portion of the query after the first '&' and before the second '&' is split at the '=' into another array, `second`
+<br>
+│   │   ├── `first[0].equals("s")` is true and `second[0].equals("user")` are true, meaning the message comes before the user in this input
+<br>
+│   │   ├── The `state` variable, containing the message state, is incremented in the format `user: message` by taking the second item of `first` as the message and the second item of `user` as the username.
+<br>
