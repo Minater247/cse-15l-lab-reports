@@ -88,12 +88,15 @@ class ChatServer {
 
 ## Part 2: Secure Shell Keys, SCP and MKDIR
 - Path to Local Private Key
+
 <img width="476" alt="Screenshot 2024-01-30 180605" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/e32d1eba-ade8-47e7-a079-77d2769607f2">
 
 - Path to Remote Public Key
+
 <img width="618" alt="Screenshot 2024-01-30 180435" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/0a61ebf0-db77-4356-bc22-2b0d4e3ceaea">
 
 - Login Without Password
+
 <img width="857" alt="Screenshot 2024-01-30 175934" src="https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/bcb9e574-a02a-4787-81ab-95acca9109a3">
 
 ## Part 3: What I Learned
