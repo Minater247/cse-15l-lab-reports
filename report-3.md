@@ -78,7 +78,7 @@ I found the command `grep` very interesting! Here are a few interesting flags/us
 
 <hr>
 
-The `-E` and `--extended-regexp` flags allow using extended regular expressions, or 'regex', to search for a specific pattern of characters. This is useful for locating more complex patterns, such as - in this case - things that are related to endotoxins, but that are not endotoxins themselves. This command searches through the `./technical/biomed/` directory for all `.txt` files, and uses the pattern `'endotoxin-[[:alnum:]]+'` to locate all hyphenated words starting with 'endotoxin'.
+The `-E` and `--extended-regexp` flags allow using extended regular expressions to search for a specific pattern of characters. This is useful for locating more complex patterns, such as - in this case - things that are related to endotoxins, but that are not endotoxins themselves. This command searches through the `./technical/biomed/` directory for all `.txt` files, and uses the pattern `'endotoxin-[[:alnum:]]+'` to locate all hyphenated words starting with 'endotoxin'. Notably, being 'extended' means that several additional flags are available - such as a logical OR and the :alnum: field.
 ```console
 [n2reed@ieng6-201]:docsearch:401$ grep -E 'endotoxin-[[:alnum:]]+' ./technical/biomed/*.txt
 ./technical/biomed/1471-2121-3-11.txt:        other cell types such as endotoxin-stimulated monocytes [
@@ -101,3 +101,22 @@ Another application of the `-E` flag is searching for emails throughout a docume
 ```
 Additionally, here is a screenshot so the highlighted sections, with color, are visible.
 ![image](https://github.com/Minater247/cse-15l-lab-reports/assets/45747191/747095e9-8b2b-4fd7-ba9b-cc99e032f3c8)
+
+<hr>
+
+The `-c` and `--count` flags are also very useful, as they allow you to output the number of matching indices! In this case, I am searching for the same pattern as the first command, but now checking how many entries the file contains. The use of `awk` here is only to remove entries with 0 instances of `endotoxin-*`. This is useful for figuring out which files contain more instances of endotoxin-*related* words, for applications such as research papers or locating experts on the topic.
+```console
+[n2reed@ieng6-201]:docsearch:472$ grep -Ec 'endotoxin-[[:alnum:]]+' ./technical/biomed/*.txt | awk -F: '$NF!=0{print $0}'
+./technical/biomed/1471-2121-3-11.txt:1
+./technical/biomed/1471-2202-2-3.txt:1
+./technical/biomed/1476-9433-1-2.txt:2
+./technical/biomed/rr171.txt:3
+```
+
+<hr>
+
+The `-c` and `--count` flags have another interesting use-case: we can use them to replace the line-count function of `wc`! This is of course useful, as it allows us to determine the reading time and general size of a file from the command line. The use of `awk` here simply sums up the output of `grep`, and does no more complex calculations. The empty pattern of `''` passed to grep will match anything, meaning every line matches - and since the -c prints the number of matching lines, this counts the number of lines in the file.
+```console
+[n2reed@ieng6-201]:docsearch:474$ grep -c '' ./technical/biomed/*.txt | awk -F: '{total += $2} END {print "Total number of lines in biomed research papers:", total}'
+Total number of lines in biomed research papers: 490673
+```
