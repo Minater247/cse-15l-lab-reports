@@ -143,3 +143,19 @@ Let's say we want to look into how many times we're talking about health in rela
 ```
 Or, in practice, topics relating to health that also talk about some sort of cells. The first result is what we're looking for, though - a healthy state for CD28 +T cells!
 
+<hr>
+
+DNA is a pretty fundamental thing, but how long does it take for people to start talking about it? We can use the `-b` and `--byte-offset` flags to find out what character (assuming byte-sized ASCII characters) we see the first instance of a DNA string! By passing the first occurence of 4+ DNA characters to awk by grepping with the `-b` option, we can calculate the average start position of DNA in the files.
+```console
+grep -b -E '([AGTC]{4,})' ./technical/biomed/*.txt | awk -F: '{s+=$2; count++} END {printf "%.0f\n", s/count}'
+```
+
+<hr>
+
+Let's say we want to figure out whether we start talking about asprin or ibuprofen earlier in the file. We can use the `-b` and `--byte-offset` flags to calculate this, in a very similar way to the previous! In this command, we read the position of the file, fetch just the position using `awk`, and pass the output to another `awk` to calculate the average of all values.
+```console
+[n2reed@ieng6-201]:docsearch:559$ grep -w -b -A 2 'aspirin' ./technical/biomed/*.txt | awk -F: '$2!=""{print $2}' | awk '{s+=$0; count+=1} END {printf "%.0f\n", s/count}' && grep -w -b -A 2 'ibuprofen' ./technical/biomed/*.txt | awk -F: '$2
+!=""{print $2}' | awk '{s+=$0; count+=1} END {printf "%.0f\n", s/count}'
+12657
+16223
+```
