@@ -120,3 +120,26 @@ The `-c` and `--count` flags have another interesting use-case: we can use them 
 [n2reed@ieng6-201]:docsearch:474$ grep -c '' ./technical/biomed/*.txt | awk -F: '{total += $2} END {print "Total number of lines in biomed research papers:", total}'
 Total number of lines in biomed research papers: 490673
 ```
+This is in fact the line count, when verified by `wc`!
+
+<hr>
+
+The `-w` and `--word-regexp` flags are also very useful! We can use these to match only when the match is stand-alone, such as when surrounded by spaces or hyphens. In this case, we want to see whether bad or good wins in the battle of `./technical/biomed/` - so we need to find out how many instances of the words 'bad' and 'good' there are. Except, when we search, we get Carls'bad', Ahmeda'bad', 'bad'gers, and other words that just contain 'bad'! Using the `-w` flag means we don't have to worry about other words leaking in - only the word 'bad' by itself will match.
+```console
+[n2reed@ieng6-201]:docsearch:504$ grep -w 'bad' ./technical/biomed/*.txt | wc -l && grep -w 'good' ./technical/biomed/*.txt | wc -l
+31
+397
+```
+There are 31 instances of the word 'bad', and 397 of the word 'good'! In the end, good triumphs yet again.
+
+<hr>
+
+Let's say we want to look into how many times we're talking about health in relation to cells. We can use the `-w` option yet again to very easily check for both of these words! We check for all lines containing 'cell', and then pass it to another `grep` through a pipe to check that the line contains 'healthy', in turn ensuring the line contains both. The `-w` flag means that we don't have to worry about other words like extra'cell'ular creeping into the mix - just healthy cells!
+```console
+[n2reed@ieng6-201]:docsearch:520$ grep -w 'cell' ./technical/biomed/*.txt | grep -w 'healthy'
+./technical/biomed/1471-2172-2-10.txt:          healthy state the CD28 +T cell subset accounts for
+./technical/biomed/ar297.txt:          the peripheral blood of healthy donors using single-cell
+./technical/biomed/ar619.txt:        healthy control individuals to determine T-cell maturation
+```
+Or, in practice, topics relating to health that also talk about some sort of cells. The first result is what we're looking for, though - a healthy state for CD28 +T cells!
+
