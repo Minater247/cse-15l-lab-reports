@@ -92,7 +92,7 @@ The `-E` and `--extended-regexp` flags allow using extended regular expressions 
 
 <hr>
 
-Another application of the `-E` flag is searching for emails throughout a document! This command searches through the `./technical/biomed/` directory for all `.txt` files again, but this time checks for the pattern `[[:alnum:]._-]+@[[:alnum:].]+`, which matches an email with letters, numbers, underscores, and/or hyphens in the username, followed by an `@` symbol, and finally any number of alphanumeric characters as well as a dot. This isn't a very robust email finder, but it does fully find all emails in this folder.
+Another application of the `-E` flag is searching for emails throughout a document! This command searches through the `./technical/biomed/` directory for all `.txt` files again, but this time checks for the pattern `[[:alnum:]._-]+@[[:alnum:].]+`, which matches an email with letters, numbers, underscores, and/or hyphens in the username, followed by an `@` symbol, and finally any number of alphanumeric characters as well as dots. This isn't a very robust email finder, but it does fully find all emails in this folder.
 ```console
 [n2reed@ieng6-201]:docsearch:415$ grep -E '[[:alnum:]._-]+@[[:alnum:].]+' ./technical/biomed/*.txt
 ./technical/biomed/1471-2105-3-2.txt:        , "A Story" [ 63 ] , and "AA.AG@helix.ends" [ 64 ] ) and
@@ -104,7 +104,7 @@ Additionally, here is a screenshot so the highlighted sections, with color, are 
 
 <hr>
 
-The `-c` and `--count` flags are also very useful, as they allow you to output the number of matching indices! In this case, I am searching for the same pattern as the first command, but now checking how many entries the file contains. The use of `awk` here is only to remove entries with 0 instances of `endotoxin-*`. This is useful for figuring out which files contain more instances of endotoxin-*related* words, for applications such as research papers or locating experts on the topic.
+The `-c` and `--count` flags are also very useful, as they allow you to output the number of matching indices! In this case, I am searching for the same pattern as the first command, but now checking how many entries the file contains. The use of `awk` here is only to remove entries with 0 instances of `endotoxin-*`. This is useful for figuring out which files contain more instances of endotoxin-*related* words, for applications such as research papers or locating experts on the topic. The pattern `endotoxin-[[:alnum:]]+' matches the literal string 'endotoxin', followed by 1 or more letters or numbers.
 ```console
 [n2reed@ieng6-201]:docsearch:472$ grep -Ec 'endotoxin-[[:alnum:]]+' ./technical/biomed/*.txt | awk -F: '$NF!=0{print $0}'
 ./technical/biomed/1471-2121-3-11.txt:1
@@ -145,17 +145,19 @@ Or, in practice, topics relating to health that also talk about some sort of cel
 
 <hr>
 
-DNA is a pretty fundamental thing, but how long does it take for people to start talking about it? We can use the `-b` and `--byte-offset` flags to find out what character (assuming byte-sized ASCII characters) we see the first instance of a DNA string! By passing the first occurence of 4+ DNA characters to awk by grepping with the `-b` option, we can calculate the average start position of DNA in the files.
+DNA is a pretty fundamental thing, but how long does it take for people to start talking about it? We can use the `-b` and `--byte-offset` flags to find out at what character (assuming byte-sized ASCII characters) we see the first instance of a DNA string! By passing the first occurence of 4+ DNA characters to awk by grepping with the `-b` option, we can calculate the average start position of DNA in the files. The pattern `([AGTC]{4,})` searches for any one of the DNA characters A, G, T, and C, and matches if 4 or more of them are found in a row. I don't know of any word which would be formed from these, and results verify this is a decent match for locating strings of DNA!
 ```console
-grep -b -E '([AGTC]{4,})' ./technical/biomed/*.txt | awk -F: '{s+=$2; count++} END {printf "%.0f\n", s/count}'
+[n2reed@ieng6-201]:docsearch:507$ grep -b -E '([AGTC]{4,})' ./technical/biomed/*.txt | awk -F: '{s+=$2; count++} END {printf "%.0f\n", s/count}'
+25139
 ```
 
 <hr>
 
-Let's say we want to figure out whether we start talking about asprin or ibuprofen earlier in the file. We can use the `-b` and `--byte-offset` flags to calculate this, in a very similar way to the previous! In this command, we read the position of the file, fetch just the position using `awk`, and pass the output to another `awk` to calculate the average of all values.
+Let's say we want to figure out whether we start talking about asprin or ibuprofen earlier in the file. We can use the `-b` and `--byte-offset` flags to calculate this, in a very similar way to the previous! In this command, we read the position of the file, fetch just the position using `awk`, and pass the output to another `awk` to calculate the average of all values. We're just searching for the words here, so the patterns are actually pretty simple!
 ```console
 [n2reed@ieng6-201]:docsearch:559$ grep -w -b -A 2 'aspirin' ./technical/biomed/*.txt | awk -F: '$2!=""{print $2}' | awk '{s+=$0; count+=1} END {printf "%.0f\n", s/count}' && grep -w -b -A 2 'ibuprofen' ./technical/biomed/*.txt | awk -F: '$2
 !=""{print $2}' | awk '{s+=$0; count+=1} END {printf "%.0f\n", s/count}'
 12657
 16223
 ```
+It looks like, when talking about asprin, authors first mention the word about 4000 characters earlier!
