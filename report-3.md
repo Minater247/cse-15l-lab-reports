@@ -104,7 +104,7 @@ Additionally, here is a screenshot so the highlighted sections, with color, are 
 
 <hr>
 
-The `-c` and `--count` flags are also very useful, as they allow you to output the number of matching indices! In this case, I am searching for the same pattern as the first command, but now checking how many entries the file contains. The use of `awk` here is only to remove entries with 0 instances of `endotoxin-*`. This is useful for figuring out which files contain more instances of endotoxin-*related* words, for applications such as research papers or locating experts on the topic. The pattern `endotoxin-[[:alnum:]]+' matches the literal string 'endotoxin', followed by 1 or more letters or numbers.
+The `-c` and `--count` flags are also very useful, as they allow you to output the number of matching indices! In this case, I am searching for the same pattern as the first command, but now checking how many entries the file contains. The use of `awk` here is only to remove entries with 0 instances of `endotoxin-*`. This is useful for figuring out which files contain more instances of endotoxin-*related* words, for applications such as research papers or locating experts on the topic. The pattern `endotoxin-[[:alnum:]]+` matches the literal string 'endotoxin', followed by 1 or more letters or numbers.
 ```console
 [n2reed@ieng6-201]:docsearch:472$ grep -Ec 'endotoxin-[[:alnum:]]+' ./technical/biomed/*.txt | awk -F: '$NF!=0{print $0}'
 ./technical/biomed/1471-2121-3-11.txt:1
@@ -145,7 +145,7 @@ Or, in practice, topics relating to health that also talk about some sort of cel
 
 <hr>
 
-DNA is a pretty fundamental thing, but how long does it take for people to start talking about it? We can use the `-b` and `--byte-offset` flags to find out at what character (assuming byte-sized ASCII characters) we see the first instance of a DNA string! By passing the first occurence of 4+ DNA characters to awk by grepping with the `-b` option, we can calculate the average start position of DNA in the files. The pattern `([AGTC]{4,})` searches for any one of the DNA characters A, G, T, and C, and matches if 4 or more of them are found in a row. I don't know of any word which would be formed from these, and results verify this is a decent match for locating strings of DNA!
+DNA is a pretty fundamental thing, but how long does it take for people to start talking about it? We can use the `-b` and `--byte-offset` flags to find out at what character (assuming byte-sized ASCII characters) we see the first instance of a DNA string! By passing the first occurence of 4+ DNA characters to awk by grepping with the `-b` option, we can calculate the average start position of DNA in the files. The pattern `([AGTC]{4,})` searches for any one of the DNA characters 'A', 'G', 'T', and 'C', and matches if 4 or more of them are found in a row. I don't know of any word which would be formed from these, and results verify this is a decent match for locating strings of DNA!
 ```console
 [n2reed@ieng6-201]:docsearch:507$ grep -b -E '([AGTC]{4,})' ./technical/biomed/*.txt | awk -F: '{s+=$2; count++} END {printf "%.0f\n", s/count}'
 25139
