@@ -85,10 +85,10 @@ bash ./t<Tab><Enter>
 - This uses tab completion to run the test using bash, showing that it fails. (10 keypresses)
   
 ```console
-vim *<Enter>
+vim *.j*<Enter>
 ```
 
-- At first glance, that doesn't seem right, does it? Actually, this is a little trick to cut down on keypresses - since alphanumerically, the file `ListExamples.java` comes first in the directory, we can use `*` to access everything - as long as we exit with `:wq!`, which saves and quits ignoring other buffered files, it will have us edit `ListExamples.java` first! (6 keypresses)
+- At first glance, that doesn't seem right, does it? Actually, this is a little trick to cut down on keypresses - since alphanumerically, the file `ListExamples.java` comes first in the directory, we can use `*.j*` to access every file with an extension starting with `.j<...>` - as long as we exit with `:wq!`, which saves and quits ignoring other buffered files, it will have us edit `ListExamples.java` first! (9 keypresses)
   
 ```console
 ?1 <Enter>
@@ -114,7 +114,7 @@ bash t<Tab><Enter>
 
 - Finally, we run the tester again to see that all tests pass! (10 keypresses)
   
-#### Grand Total: 50 keypresses. Significantly better!
+#### Grand Total: 53 keypresses. Significantly better!
 
 ## Attempt 3: Pushing The Limits
 ```console
@@ -197,4 +197,4 @@ t<Enter>
   
 #### Grand Total: 15 keypresses!
 
-I could optimize more, but I wanted this to at least be able to be run on any git repository saved to the clipboard. Additionally, by combining the aliases using &&, it is possible to save 4 more keypresses, but since we haven't learned that yet, I've left it out.
+I could optimize more, but I wanted this to at least be able to be run on any git repository saved to the clipboard. Additionally, by combining the aliases using &&, it is possible to save 4 more keypresses, but since we haven't gone over that in class yet, I've left it out.
