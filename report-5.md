@@ -130,3 +130,7 @@ To trigger the bug, I ran the following command:
 <hr>
 
 The fix for the issue was actually quite simple, despite the complex-sounding issue - by changing the `\\W` in the regex pattern to `\\s`, the pattern now matches every non-whitespace character instead of every letter and number. By then excluding a few punctuation marks, as the student had done, the pattern correctly matches all the words on a line!
+
+## Part 2: Reflection
+
+One cool thing I learned during this course was the true power of pipes and redirects! I had been using Python for most of my simple scripts, but after going through this course, I now have a lot more tools I can use under my belt - such as `awk`, `grep`, `xargs`, and `head`/`tail`!
