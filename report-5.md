@@ -29,12 +29,13 @@ Directory Structure:
 └── common_in_dir.sh
 ```
 
-`contents/beemovie.txt` contains the entire script to the Bee Movie, as defined at [this link](https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script)
+`contents/beemovie.txt` contains the entire script to the Bee Movie, as defined at [this link](https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script).
 
-`contents/cars2.txt` contains the entire script to Cars 2, as defined at [this link](https://s3-us-west-2.amazonaws.com/script-pdf/cars-2-script-pdf.pdf)
+`contents/cars2.txt` contains the entire script to Cars 2, as defined at [this link](https://s3-us-west-2.amazonaws.com/script-pdf/cars-2-script-pdf.pdf).
 
 `Reader.java` contains the following code:
 ```java
+// CSE15 WI24: Lab 11
 // Read the contents of the files in contents/ and locate the top 10 most frequent words in the files.
 // The words are case-insensitive and the output should be in lower case.
 
