@@ -133,4 +133,4 @@ The fix for the issue was actually quite simple, despite the complex-sounding is
 
 ## Part 2: Reflection
 
-One cool thing I learned during this course was the true power of pipes and redirects! I had been using Python for most of my simple scripts, but after going through this course, I now have a lot more tools I can use under my belt - such as `awk`, `grep`, `xargs`, and `head`/`tail`!
+One cool thing I learned during the second half of this course, although not part of the course syllabus, was the `AUTOEXEC` portion of the `vim` command's `vimrc` (located at `~/.vimrc`. Through this, it is possible to run some commands when opening a file - such as one I found useful, dropping Windows' carraige returns at the end of lines when importing files!
